@@ -1,4 +1,4 @@
-package jpabook.jpashop;
+package jpabook.jpashop.ex1;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
