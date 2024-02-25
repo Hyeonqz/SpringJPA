@@ -1,6 +1,5 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.ex1.MemberRepository;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
