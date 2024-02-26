@@ -28,7 +28,7 @@ public class MemberService {
     public Long join(Member member) {
         validateDuplicateMember(member); //중복 회원 검증
         memberRepository.save(member);
-        return null;
+        return member.getId();
     }
 
     // 중복 회원 검증하는 비즈니스 로직
@@ -36,9 +36,8 @@ public class MemberService {
         // Exception
         List<Member> findMembers =  memberRepository.findByName(member.getName());
         if(!findMembers.isEmpty()) {
-            throw new IllegalArgumentException("이미 존재하는 회원입니다.");
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
-
     }
 
     // 회원 전체 조회

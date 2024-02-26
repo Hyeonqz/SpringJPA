@@ -17,7 +17,7 @@ public class MemberRepository {
     private final EntityManager em;
 
     public void save(Member member) {
-        em.persist(member);
+        em.persist(member); //persist를 한다고 해서 insert가 되지 않는다.
     }
 
     // 단건 조회
