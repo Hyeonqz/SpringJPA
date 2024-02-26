@@ -2,6 +2,7 @@ package jpabook.jpashop.domain.Item;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,5 +25,24 @@ public abstract class Item { //추상 클래스로 선언을 함
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    // 비즈니스 로직
+    // 엔티티 자체에서 해결할 수 있는 것들은
+    // 엔티티안에 비즈니스 로직을 넣어서 해결을 한다 ( DDD )
+    /* 재고수량 증가시키는 로직*/
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    /* 재고수량 감소시키는 로직*/
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
+
+    // 객체지향적 으로 보면, 데이터를 가진 쪽에서 비즈니스 로직이 있어야 응집력이 있다. -> 관리하기가 편하다.
 }
 
